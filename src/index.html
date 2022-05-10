@@ -10,19 +10,16 @@
 </head>
 <body>
   <div class="wrapper">
-    <div class="task-input">
-      <i class="fa-solid fa-align-left"></i>
-      <input type="text" placeholder="Add a new task" id="toDoInput">
+    <div class="heading">
+      <h3>Today's To Do</h3>
+      <i class="fa-solid fa-rotate"></i>
     </div>
-    <div class="controls">
-      <div class="filters">
-        <span id="all" class="active">All</span>
-        <span id="all">Pending</span>
-        <span id="all">Completed</span>
-      </div>
-      <button class="clear-btn">Clear All</button>
+    <div class="task-input">
+      <input type="text" placeholder="Add to your list" id="toDoInput">
+      <i class="fa-solid fa-right-to-bracket"></i>
     </div>
     <ul class="task-box"></ul>
+    <button type="button" class="clear-btn">Clear all completed</button>
   </div>
 
   <script src="./src/index.js"></script>
