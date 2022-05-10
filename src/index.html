@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Getting Started</title>
-    <script src="https://unpkg.com/lodash@4.17.20"></script>
-  </head>
-  <body>
-    <script src="./src/index.js"></script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://kit.fontawesome.com/1242660221.js" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="task-input">
+      <i class="fa-solid fa-align-left"></i>
+      <input type="text" placeholder="Add a new task" id="toDoInput">
+    </div>
+    <div class="controls">
+      <div class="filters">
+        <span id="all" class="active">All</span>
+        <span id="all">Pending</span>
+        <span id="all">Completed</span>
+      </div>
+      <button class="clear-btn">Clear All</button>
+    </div>
+    <ul class="task-box"></ul>
+  </div>
+
+  <script src="./src/index.js"></script>
+</body>
 </html>
