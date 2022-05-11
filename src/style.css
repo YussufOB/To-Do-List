@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,11 +7,7 @@
 
 body {
   max-height: 100vh;
-}
-
-li {
-  list-style-type: none;
-  list-style: none;
+  background: whitesmoke;
 }
 
 .wrapper {
@@ -19,7 +15,7 @@ li {
   justify-content: center;
   flex-direction: column;
   margin: 20vh auto;
-  background: rgb(149, 186, 186);
+  background: white;
   max-width: 90%;
 }
 
@@ -32,7 +28,6 @@ li {
   margin: 10px 12px;
   padding-top: 14px;
   padding-right: 14px;
-
 }
 
 .task-input {
@@ -62,6 +57,7 @@ li {
 }
 
 li {
+  list-style-type: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -92,25 +88,27 @@ li {
 }
 
 .settings .task-menu {
+  display: none;
   position: absolute;
   background: #fff;
   z-index: 2;
   border-radius: 4px;
   bottom: 8px;
-  box-shadow:  0 0 6px rgba(0,0,0,0.15);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
   transform: scale(0);
   transform-origin: top right;
   transition: transform 0.3s ease;
 }
 
-.settings:hover .task-menu {
+/* .settings:hover .task-menu {
   transform: scale(1);
-}
+} */
 
 .task-menu li {
   height: 25px;
   font-size: 16px;
   justify-content: flex-start;
+  cursor: pointer;
 }
 
 .task-menu li:last-child {
@@ -121,6 +119,7 @@ li {
   margin-top: 3px;
   margin-right: 25px;
 }
+
 .task-box .task {
   font-size: 16px;
   margin: 10px 12px;

@@ -34,9 +34,6 @@ const loadData = () => {
               </label>
               <div class='settings'>
                 <i class='fa-solid fa-ellipsis-vertical'></i>
-                <ul class='task-menu'>
-                  <li><i class='fa-solid fa-trash-can'></i></li>
-                </ul>
               </div>
             </li>
             <hr>`;
