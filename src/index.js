@@ -1,5 +1,6 @@
 import './style.css';
 import { setItems, getItems, addTask } from './local_storage.js';
+import { toggleCompleted, editTask, deleteTask } from './status.js';
 
 // Create Element function
 const createLi = (obj) => {
@@ -66,67 +67,6 @@ addBtn.addEventListener('click', (e) => {
   }
 });
 
-// Re-order function
-const reorder = (obj) => {
-  let count = 0;
-  obj.forEach(() => {
-    if (count === 0) {
-      obj[count].id = 1;
-    } else {
-      obj[count].id = obj[count - 1].id + 1;
-    }
-    count += 1;
-  });
-};
-
-// Delete task function
-const deleteTask = (index) => {
-  const taskList = getItems();
-  const newTaskList = taskList.filter((task) => task.id !== index);
-  reorder(newTaskList);
-  setItems(newTaskList);
-};
-
-// Edit task function
-const editTask = (event) => {
-  let index = event.target.parentElement.classList[0];
-  index = parseInt(index, 10);
-  const taskList = getItems();
-  taskList.forEach((item) => {
-    if (item.id === index) {
-      if (event.target.value.length >= 1) {
-        item.description = event.target.value;
-        setItems(taskList);
-      }
-      if (event.target.value.length === 0) {
-        const isconfirm = window.confirm('you are about to delete this todo log?');
-        if (isconfirm) {
-          deleteTask(index);
-          event.target.parentElement.remove();
-        }
-      }
-    }
-  });
-};
-
-// Toggle function
-const toggleCompleted = (event) => {
-  let index = event.target.parentElement.classList[0];
-  index = parseInt(index, 10);
-  const taskList = getItems();
-
-  taskList.forEach((item) => {
-    if (item.id === index) {
-      if (event.target.checked) {
-        item.completed = true;
-      } else if (!event.target.checked) {
-        item.completed = false;
-      }
-      setItems(taskList);
-    }
-  });
-};
-
 // Event handler of whole document
 document.addEventListener('click', (e) => {
   if (e.target.matches('.fa-trash-can')) {
@@ -157,7 +97,7 @@ document.addEventListener('click', (e) => {
 });
 
 // Clear all completed task function
-const clearAllComplete = () => {
+const clearAllCompleted = () => {
   const taskList = getItems();
   const newTaskList = taskList.filter((item) => item.completed === false);
   setItems(newTaskList);
@@ -166,5 +106,5 @@ const clearAllComplete = () => {
 
 // Clear all complete event handler
 document.querySelector('.clearButton').addEventListener('click', () => {
-  clearAllComplete();
+  clearAllCompleted();
 });
