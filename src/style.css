@@ -6,7 +6,6 @@ body {
   font-family: sans-serif;
   padding: 0;
   margin: 0;
-  /* background-color: bisque; */
 }
 
 h1,
@@ -55,6 +54,14 @@ a {
   text-decoration: line-through;
 }
 
+.taskList input[type="text"] {
+  outline: none;
+  border: none;
+  width: 75%;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
 .taskList input[type="text"]:focus,
 .container li:focus {
   background: #cffacf;
@@ -62,8 +69,11 @@ a {
 
 .container li p {
   cursor: pointer;
-  /* width: 10%; */
   margin-left: 10px;
+}
+
+.addBtn {
+  cursor: pointer;
 }
 
 .clearButton {
@@ -106,9 +116,6 @@ a {
 }
 
 .fa-arrow-turn-down {
-  /* transform: rotate(90deg); */
-  /* font-size: 12px; */
-  /* color: #777776; */
   cursor: pointer;
 }
 
@@ -128,14 +135,6 @@ a {
   transform: translate(-50%, -50%);
   box-shadow: 0 1px 10px 0 grey;
   border-radius: 12px 12px 0 0;
-}
-
-.taskList input[type="text"] {
-  outline: none;
-  border: none;
-  width: 75%;
-  padding: 0.75rem;
-  font-size: 1rem;
 }
 
 .dragging {
