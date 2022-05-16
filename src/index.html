@@ -6,22 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="index.css">
   <script src="https://kit.fontawesome.com/1242660221.js" crossorigin="anonymous"></script>
-  <title>Document</title>
+  <title>To Do List</title>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="heading">
-      <h3>Today's To Do</h3>
-      <i class="fa-solid fa-rotate"></i>
-    </div>
-    <div class="task-input">
-      <input type="text" placeholder="Add to your list" id="toDoInput">
-      <i class="fa-solid fa-right-to-bracket"></i>
-    </div>
-    <ul class="task-box"></ul>
-    <button type="button" class="clear-btn">Clear all completed</button>
+  <div class="container">
+    <h1>Today's To Do <i class="fa-solid fa-arrows-rotate refresh"></i></h1>
+    <form>
+      <input type="text" class="addToDo" required placeholder="Add to your list...">
+      <i class="fa-solid fa-right-to-bracket addBtn"></i>
+    </form>
+    <ul class="taskList"></ul>
+    <p class="clearButton">Clear all completed</p>
   </div>
 
-  <script src="./src/index.js"></script>
+  <script src="./src/index.js" defer></script>
 </body>
+
+
 </html>
