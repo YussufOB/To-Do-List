@@ -2,7 +2,7 @@
 
 > This project contains an app for to do list (Adding, Removing and Editing of daily tasks).
 > ES-6 synthax is strictly used.
-> Javascript features (modularization) and webpack are also inculcated.
+> Javascript features (modularization), jest testing and webpack are also inculcated.
 
 
 ## Built With
