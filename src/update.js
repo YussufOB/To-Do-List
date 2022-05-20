@@ -1,5 +1,5 @@
-const updateList = (taskList, index) => {
-  taskList.forEach((item) => {
+const update = (tasklist, index) => {
+  tasklist.forEach((item) => {
     if (item.id === index) {
       if (item.completed) {
         item.completed = false;
@@ -8,12 +8,12 @@ const updateList = (taskList, index) => {
       }
     }
   });
-  return taskList;
+  return tasklist;
 };
 
-const clearAllComplete = (taskList) => {
-  const filteredTaskList = taskList.filter((item) => item.completed === false);
-  return filteredTaskList;
+const clearAllComplete = (tasklist) => {
+  const filteredtaskList = tasklist.filter((item) => item.completed === false);
+  return filteredtaskList;
 };
 
-export { updateList, clearAllComplete };
+export { update, clearAllComplete };

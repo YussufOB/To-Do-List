@@ -1,110 +1,89 @@
 import './style.css';
-import { setItems, getItems, addTask } from './local_storage.js';
-import { toggleCompleted, editTask, deleteTask } from './status.js';
+import deleteTask from './deleteTask.js';
+import addTask from './addTask.js';
+import createList from './createList.js';
+import loadTaskList from './loadTaskList.js';
+import editTask from './editTask.js';
+import { update, clearAllComplete } from './update.js';
+import LocalStorage from './storage.js';
 
-// Create Element function
-const createLi = (obj) => {
-  const li = document.createElement('li');
-  const checkbox = document.createElement('input');
-  const description = document.createElement('input');
-  const i = document.createElement('i');
-  description.type = 'text';
-  description.value = `${obj.description}`;
-  description.desabled = true;
-  checkbox.type = 'checkbox';
-  i.classList.add('fa-solid', 'fa-ellipsis-vertical');
-  li.classList.add(obj.id);
-  li.classList.add('todos');
-  li.append(checkbox, description, i);
-  document.querySelector('.taskList').prepend(li);
-  if (obj.completed) {
-    checkbox.checked = true;
-    li.classList.add('checked');
-  }
-};
+// creating instance of local storage
+const store = new LocalStorage();
+loadTaskList(store.getItems());
 
-// loadTaskList
-const loadTaskList = () => {
-  const taskList = getItems();
-  taskList.sort((a, b) => b.id - a.id)
-    .forEach((task) => {
-      createLi(task);
-    });
-};
-
-loadTaskList();
-
-// Add Task to Dom function
-const addTasktoDom = (newTask) => {
-  addTask(newTask);
-  createLi(newTask);
-};
-
-// Add Task Event Handler
 const addToDo = document.querySelector('.addToDo');
-const addBtn = document.querySelector('.addBtn');
 const form = document.querySelector('form');
 
+// event handler for input form
 form.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     if (addToDo.value === '') {
       addToDo.setCustomValidity('Please add task description.');
     } else {
       e.preventDefault();
-      addTasktoDom({ description: addToDo.value });
+      const tasklist = store.getItems();
+      const newTask = { description: addToDo.value };
+      const updatedList = addTask(tasklist, newTask);
+      createList(newTask);
       addToDo.value = '';
+      store.setItems(updatedList);
     }
   }
 });
 
-addBtn.addEventListener('click', (e) => {
-  if (addToDo.value === '') {
-    addToDo.setCustomValidity('Please add task description.');
-  } else {
-    e.preventDefault();
-    addTasktoDom({ description: addToDo.value });
-    addToDo.value = '';
-  }
-});
-
-// Event handler of whole document
+// events handler for other parts of the app
 document.addEventListener('click', (e) => {
+  const taskList = store.getItems();
   if (e.target.matches('.fa-trash-can')) {
     let index = e.target.parentElement.classList[0];
     index = parseInt(index, 10);
-    deleteTask(index);
-    e.target.parentElement.remove();
+    const newTasklist = deleteTask(taskList, index);
+    store.setItems(newTasklist);
+    window.location.reload();
   } else if (e.target.matches('.taskList input[type="text"]')) {
     const element = e.target.parentElement.querySelector('i');
     element.classList.toggle('fa-trash-can');
     element.classList.toggle('fa-ellipsis-vertical');
-    element.classList.add('active');
-
+    e.target.parentElement.classList.toggle('active');
     e.target.classList.toggle('active');
     e.target.addEventListener('input', (event) => {
-      editTask(event);
+      let index = event.target.parentElement.classList[0];
+      index = parseInt(index, 10);
+      const input = event.target.value;
+      const editedTaskList = editTask(taskList, index, input);
+      store.setItems(editedTaskList);
     });
   } else if (e.target.matches('.taskList input[type="checkbox"]')) {
     e.target.addEventListener('change', (event) => {
-      toggleCompleted(event);
+      let index = event.target.parentElement.classList[0];
+      index = parseInt(index, 10);
+      const updatedList = update(taskList, index);
+      store.setItems(updatedList);
       if (!e.target.checked) {
         e.target.parentElement.classList.remove('checked');
       } else {
         e.target.parentElement.classList.add('checked');
       }
     });
+  } else if (e.target.matches('.clearButton')) {
+    const sortedList = clearAllComplete(taskList);
+    store.setItems(sortedList);
+    window.location.reload();
+  } else if (e.target.matches('.refresh')) {
+    const sortedList = clearAllComplete(taskList);
+    store.setItems(sortedList);
+    window.location.reload();
+  } else if (e.target.matches('.addBtn')) {
+    if (addToDo.value === '') {
+      addToDo.setCustomValidity('Please add task description.');
+    } else {
+      e.preventDefault();
+      const tasklist = store.getItems();
+      const newTask = { description: addToDo.value };
+      const updatedList = addTask(tasklist, newTask);
+      createList(newTask);
+      addToDo.value = '';
+      store.setItems(updatedList);
+    }
   }
-});
-
-// Clear all completed task function
-const clearAllCompleted = () => {
-  const taskList = getItems();
-  const newTaskList = taskList.filter((item) => item.completed === false);
-  setItems(newTaskList);
-  window.location.reload();
-};
-
-// Clear all complete event handler
-document.querySelector('.clearButton').addEventListener('click', () => {
-  clearAllCompleted();
 });

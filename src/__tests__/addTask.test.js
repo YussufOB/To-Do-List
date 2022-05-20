@@ -1,13 +1,23 @@
-import { addTask, setItems, getItems } from '../local_storage.js';
-import LocalStorage from '../__mocks__/local_storage.js';
+import addTask from '../addTask.js';
+import LocalStorage from '../__mocks__/storage.js';
 
-// create instance of store
-const testStore = new LocalStorage();
-const newTask = { description: 'Test dumming task' };
-let testList = testStore.getItems();
+const store = new LocalStorage();
+let taskList = store.getItems();
+const newTask = { description: 'Testing todo' };
 
-describe('Add task to local storage', () => {
-  testList = addTask(testList, newTask);
+describe('Add new task to storage', () => {
+  taskList = addTask(taskList, newTask);
 
-  test('');
+  test('function existence', () => {
+    expect(typeof addTask(taskList, newTask)).toBe('object');
+  });
+  test('check task added to taskList', () => {
+    expect(taskList[3].description).toBe('Testing todo');
+  });
+  test('default complete status', () => {
+    expect(taskList[3].completed).toBe(false);
+  });
+  test('Id order from 1', () => {
+    expect(taskList[0].id).toBe(1);
+  });
 });

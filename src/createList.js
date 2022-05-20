@@ -10,7 +10,6 @@ const createList = (newTask) => {
   checkbox.type = 'checkbox';
   i.classList.add('fa-solid', 'fa-ellipsis-vertical');
   li.classList.add(newTask.id);
-  li.classList.add('todos');
   li.append(checkbox, description, i);
   document.querySelector('.taskList').prepend(li);
   if (newTask.completed) {
